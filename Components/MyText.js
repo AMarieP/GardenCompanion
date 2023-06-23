@@ -3,7 +3,7 @@ import React from 'react'
 
 const MyText = (props) => {
   return (
-    <Text {...props} style={[{fontFamily: 'Ovo_400Regular'}, props.style]}>{props.children}</Text>
+    <Text {...props} style={[{fontFamily: 'Ovo_400Regular', fontSize: 16}, props.style]}>{props.children}</Text>
   )
 }
 
