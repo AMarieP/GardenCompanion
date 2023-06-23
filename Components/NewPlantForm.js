@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
+import { StyleSheet, View, Image, TextInput } from 'react-native';
+import Text from './MyText';
 import { useForm, Controller } from "react-hook-form";
-import React from 'react'
+import {Picker} from '@react-native-picker/picker';
+import { React, useState } from 'react'
 
 //Image is placeholder for now
 
@@ -13,8 +15,11 @@ const NewPlantForm = () => {
     
      const onSubmit = (data) => console.log(data)
 
+     //Picker
+     const [days, setSelectedDays] = useState();
+
     return (
-        <View>
+        <View style={{backgroundColor: 'pink'}}>
         <Text>New Plant Type</Text>
         <Image />
         <View>
@@ -35,14 +40,41 @@ const NewPlantForm = () => {
         )}
         name="plantName"
       />
-      {errors.firstName && <Text>This is required.</Text>}
-
         </View>
         <View>
             <Text>status effects:</Text>
-        </View>
-        <View>
-            <Text>life cycle:</Text>
+            <View style={styles.pickerContainer}>
+                <Text>water: </Text>
+                <Text>every </Text>
+                <Picker
+                    style={styles.picker}
+                    selectedValue={days}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedDays(itemValue)
+                    }>
+                    <Picker.Item label="1" value="1" />
+                    <Picker.Item label="2" value="2" />
+                    <Picker.Item label="3" value="3" />
+                    <Picker.Item label="4" value="4" />
+                    <Picker.Item label="5" value="5" />
+                    <Picker.Item label="6" value="6" />
+                    <Picker.Item label="7" value="7" />
+                    <Picker.Item label="8" value="8" />
+                    <Picker.Item label="9" value="9" />
+                    <Picker.Item label="10" value="10" />
+                    <Picker.Item label="11" value="11" />
+                    <Picker.Item label="12" value="12" />
+                    <Picker.Item label="13" value="13" />
+                    <Picker.Item label="14" value="14" />
+                    <Picker.Item label="15" value="15" />
+                    <Picker.Item label="16" value="16" />
+                    <Picker.Item label="17" value="17" />
+                    <Picker.Item label="18" value="18" />
+                    <Picker.Item label="19" value="19" />
+                    <Picker.Item label="20" value="20" />
+                    </Picker>
+                <Text> days.</Text>
+            </View>
         </View>
         </View>
   )
@@ -50,4 +82,18 @@ const NewPlantForm = () => {
 
 export default NewPlantForm
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    pickerContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: "center"
+    },
+    picker: {
+        width: 100,
+        height: 10,
+        borderWidth: 5,
+        borderColor: 'blue',
+        fontFamily: 'Ovo_400Regular',
+    },
+    
+})
