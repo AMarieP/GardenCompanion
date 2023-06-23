@@ -7,7 +7,10 @@ const PlantCard = ({props}) => {
     <View style={[styles.container,  
         {width: Dimensions.get('window').width * 0.45,
         height: Dimensions.get('window').height * 0.29,}]}>
-      <Text style={styles.title}>{props.plantName}</Text>
+      <Text adjustsFontSizeToFit
+            numberOfLines={2}
+            maxFontSizeMultiplier={1}
+            style={styles.title}>{props.plantName}</Text>
       <View style={styles.conatinerTwo}>
         <Image
         source={props.plantImage} style={styles.image}/>
@@ -46,6 +49,10 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        
+      fontFamily: 'Ovo_400Regular',
+      textAlign: 'left',
+      width: '80%',
+      marginBottom: 2,
+      fontSize: 24
     }
 })
