@@ -1,11 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import PlantCard from './Components/PlantCard';
+import testPlant from './testPlant';
+
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>Hello</Text>
+      <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around'}}>
+      <PlantCard props={testPlant}/>
+      <PlantCard props={testPlant}/>
+      </View>
     </View>
   );
 }
