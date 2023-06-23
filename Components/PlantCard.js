@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-nati
 import React from 'react'
 
 // change view to Pressable
+//for effect map them
 const PlantCard = ({props}) => {
   return (
     <View style={[styles.container,  
@@ -14,7 +15,7 @@ const PlantCard = ({props}) => {
       <View style={styles.conatinerTwo}>
         <Image
         source={props.plantImage} style={styles.image}/>
-        <View></View>
+        <View style={styles.effects}></View>
       </View>
     </View>
   )
