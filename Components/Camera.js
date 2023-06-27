@@ -1,5 +1,6 @@
 import { StyleSheet, Image, View, Button } from 'react-native'
 import React, { useState } from 'react'
+import colours from '../colours'
 
 //Bug w launchCameraAsync on android 
 import { launchImageLibraryAsync } from 'expo-image-picker'
@@ -15,10 +16,10 @@ const CameraDemo = () => {
 
   return (
     <View>
-      <View style={{width: '100%', height: 300, backgroundColor: 'blue', marginTop: 20}}>
+      <View style={{width: '100%', height: 300, backgroundColor: colours.greenLight, marginTop: 20}}>
         <Image source={{uri:pickedImage, height: 300, width: '100%'}} />
       </View>
-      <Button title='Add Your Picture' onPress={handleCamera}/>
+      <Button title='Add Photo From Device' onPress={handleCamera} color={colours.green} />
     </View>
   )
 }
