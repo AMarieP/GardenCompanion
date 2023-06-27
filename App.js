@@ -10,6 +10,7 @@ import { useFonts, Ovo_400Regular } from '@expo-google-fonts/ovo';
 import PlantCard from './Components/PlantCard';
 import testPlant from './testPlant';
 import Fieldset from './Components/Fieldset';
+import CameraDemo from './Components/Camera';
 
 //Form
 import NewPlantForm from './Components/NewPlantForm';
@@ -33,14 +34,14 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <View style={styles.container}>
-      {/* <Text style={{fontFamily: 'Ovo_400Regular'}} >Hello</Text>
-      <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around'}}>
-      <PlantCard props={testPlant}/>
-      <PlantCard props={testPlant}/>
-      </View> */}
-        <NewGardenForm />
-      </View>
+      <CameraDemo />
+      // <View style={styles.container}>
+      // <Text style={{fontFamily: 'Ovo_400Regular'}} >Hello</Text>
+      // <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around'}}>
+      // <PlantCard props={testPlant}/>
+      // <PlantCard props={testPlant}/>
+      // </View>
+      // </View>
     );
   }
 
