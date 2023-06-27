@@ -11,6 +11,15 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
+
     "assetBundlePatterns": [
       "**/*"
     ],
