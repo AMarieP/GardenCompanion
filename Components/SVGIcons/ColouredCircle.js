@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import React from 'react'
+
+import colours from '../../colours'
+import ColorPicker from 'react-native-wheel-color-picker'
 
 
 const ColouredCircle = () => {
-    const [hex, setHex] = useState("#fff");
   return (
-<Text>hi</Text>
+      <View style={{}}>
+        <ColorPicker
+          style={{}}
+          row={false}
+          swatchesOnly={true}
+          palette={[colours.green, colours.navy, colours.mustard, colours.purple, colours.red, colours.greenLight, colours.mustardLight, colours.navyLight, colours.purpleLight, colours.redLight]}
+        />
+        </View>
   );
 }
 

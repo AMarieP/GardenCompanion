@@ -25,17 +25,7 @@ const NewGardenForm = () => {
           </Fieldset>
           <Fieldset title="Colour:">
               <View style={styles.pickerContainer}>
-                  <Picker
-                      style={styles.picker}
-                      selectedValue={colour}
-                      onValueChange={(itemValue, itemIndex) =>
-                        setColour(itemValue)
-                      }>
-                      <Picker.Item label="1" value="1" />
-                      <Picker.Item label="1" value="1" />
-
-                      </Picker>
-                  <Text> days.</Text>
+                  
               </View>
           </Fieldset>
         </View>
@@ -53,12 +43,6 @@ const styles = StyleSheet.create({
         alignItems: 'baseline',
         // backgroundColor:'pink',
         marginVertical: 10
-    },
-    picker: {
-        width: 100,
-        height: 50,
-        backgroundColor: "blue",
-        borderWidth: 1
     },
     container: {
       width: '100%',
