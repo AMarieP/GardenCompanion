@@ -10,7 +10,6 @@ import { useFonts, Ovo_400Regular } from '@expo-google-fonts/ovo';
 import PlantCard from './Components/PlantCard';
 import testPlant from './testPlant';
 import Fieldset from './Components/Fieldset';
-import ColouredCircle from './Components/SVGIcons/ColouredCircle';
 
 //Form
 import NewPlantForm from './Components/NewPlantForm';

@@ -3,15 +3,10 @@ import Text from './MyText';
 import H1 from './H1';
 import H2 from './H2'
 import Fieldset from './Fieldset';
-import {Picker} from '@react-native-picker/picker';
 import { React, useState } from 'react'
 
 
 const NewGardenForm = () => {
-
-
-     //Picker
-     const [colour, setColour] = useState();
 
     return (
         <View style={styles.container}>
@@ -25,7 +20,7 @@ const NewGardenForm = () => {
           </Fieldset>
           <Fieldset title="Colour:">
               <View style={styles.pickerContainer}>
-                  
+                  {/* where colour pciker would be */}
               </View>
           </Fieldset>
         </View>
