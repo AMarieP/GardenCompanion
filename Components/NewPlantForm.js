@@ -3,10 +3,12 @@ import Text from './MyText';
 import H1 from './H1';
 import H2 from './H2'
 import Fieldset from './Fieldset';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import { React, useState } from 'react'
 
 //Image is placeholder for now
+//Placeholder text will be from the plant selection for now
+
 
 const NewPlantForm = () => {
 
@@ -62,7 +64,7 @@ const NewPlantForm = () => {
                   <Text> days.</Text>
               </View>
               <View style={styles.pickerContainer}>
-                  <H2>water: </H2>
+                  <H2>fertilize: </H2>
                   <Text>every </Text>
                   <Picker
                       style={styles.picker}

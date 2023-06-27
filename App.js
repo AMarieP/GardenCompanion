@@ -10,6 +10,7 @@ import { useFonts, Ovo_400Regular } from '@expo-google-fonts/ovo';
 import PlantCard from './Components/PlantCard';
 import testPlant from './testPlant';
 import Fieldset from './Components/Fieldset';
+import ColouredCircle from './Components/SVGIcons/ColouredCircle';
 
 //Form
 import NewPlantForm from './Components/NewPlantForm';
@@ -20,6 +21,7 @@ import { FertEffect } from './Components/SVGIcons/FertEffect';
 import { WaterEffect } from './Components/SVGIcons/WaterEffect';
 import { EditButton } from './Components/SVGIcons/EditButton';
 import { AddButton } from './Components/SVGIcons/AddButton';
+import NewGardenForm from './Components/NewGardenForm';
 
 export default function App() {
   
@@ -38,7 +40,7 @@ export default function App() {
       <PlantCard props={testPlant}/>
       <PlantCard props={testPlant}/>
       </View> */}
-        <NewPlantForm />
+        <NewGardenForm />
       </View>
     );
   }
