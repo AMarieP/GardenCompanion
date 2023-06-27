@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, TextInput, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, View, TextInput, Dimensions } from 'react-native';
 import Text from './MyText';
 import H1 from './H1';
 import H2 from './H2'
@@ -16,9 +16,6 @@ const NewGardenForm = () => {
     return (
         <View style={styles.container}>
           <H1>New Garden Sector</H1>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={capsicum}/>
-          </View>
           <Fieldset title="name: ">
             <View>
               <TextInput
@@ -30,11 +27,13 @@ const NewGardenForm = () => {
               <View style={styles.pickerContainer}>
                   <Picker
                       style={styles.picker}
-                      selectedValue={days}
+                      selectedValue={colour}
                       onValueChange={(itemValue, itemIndex) =>
-                          setSelectedDays(itemValue)
+                        setColour(itemValue)
                       }>
                       <Picker.Item label="1" value="1" />
+                      <Picker.Item label="1" value="1" />
+
                       </Picker>
                   <Text> days.</Text>
               </View>
