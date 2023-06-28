@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useEffect} from 'react'
 
-import { DatabaseConnection } from '../Components/Database/Database'
+import { DatabaseConnection } from '../Components/database/Database'
+
+import NewGardenForm from '../Components/NewGardenForm';
 
 const db = DatabaseConnection.getConnection();
 
@@ -22,7 +24,7 @@ const Landing = () => {
 
   return (
     <View>
-      <Text>Landing</Text>
+      <NewGardenForm />
     </View>
   )
 }

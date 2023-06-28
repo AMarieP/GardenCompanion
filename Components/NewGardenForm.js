@@ -1,12 +1,31 @@
-import { StyleSheet, View, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, View, TextInput, Dimensions, Button } from 'react-native';
 import Text from './MyText';
 import H1 from './H1';
 import H2 from './H2'
 import Fieldset from './Fieldset';
 import { React, useState } from 'react'
 
+//Database
+import { DatabaseConnection } from './database/Database';
+
+const db = DatabaseConnection.getConnection()
+
 
 const NewGardenForm = () => {
+  //Handles Input
+  const [name, setName] = useState('')
+
+  const addGardenDB = () => {
+    db.transaction(function(tx){
+      tx.executeSql(
+        'INSERT INTO garden_table(garden_name)VALUES(?)',
+        [name],
+        (tx, results) => {
+          console.log("Garden Added Sucessfully ")
+        }
+      )
+    })
+  }
 
     return (
         <View style={styles.container}>
@@ -15,6 +34,8 @@ const NewGardenForm = () => {
             <View>
               <TextInput
                 placeholder='e.g. "Front Yard Garden Bed" or "Bathroom Shelf"'
+                value={name}
+                onChangeText={name=>setName(name)}
               />
             </View>
           </Fieldset>
@@ -23,6 +44,7 @@ const NewGardenForm = () => {
                   {/* where colour pciker would be */}
               </View>
           </Fieldset>
+          <Button title='Submit' onPress={addGardenDB} />
         </View>
   )
 }
