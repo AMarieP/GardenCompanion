@@ -3,8 +3,6 @@ import React, {useEffect} from 'react'
 
 import { DatabaseConnection } from '../Components/database/Database'
 
-import NewGardenForm from '../Components/NewGardenForm';
-
 const db = DatabaseConnection.getConnection();
 
 const Landing = () => {
@@ -24,7 +22,6 @@ const Landing = () => {
 
   return (
     <View>
-      <NewGardenForm />
     </View>
   )
 }

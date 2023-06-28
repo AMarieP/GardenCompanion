@@ -7,7 +7,7 @@ import { launchImageLibraryAsync } from 'expo-image-picker'
 
 const Camera = () => {
 
-    const [pickedImage, setImage] = useState()
+    const [pickedImage, setImage] = useState('')
     
     const handleCamera = async()=>{
         const image = await launchImageLibraryAsync()

@@ -14,16 +14,12 @@ import CameraDemo from './Components/Camera';
 import Landing from './Screens/Landing';
 import MyGardens from './Screens/MyGardens';
 
-//Form
-import NewPlantForm from './Components/NewPlantForm';
-
 //buttonSVG
 import { CustomStatus } from './Components/SVGIcons/CustomStatus';
 import { FertEffect } from './Components/SVGIcons/FertEffect';
 import { WaterEffect } from './Components/SVGIcons/WaterEffect';
 import { EditButton } from './Components/SVGIcons/EditButton';
 import { AddButton } from './Components/SVGIcons/AddButton';
-import NewGardenForm from './Components/NewGardenForm';
 
 export default function App() {
   
