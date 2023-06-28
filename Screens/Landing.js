@@ -14,7 +14,17 @@ const Landing = () => {
                 'CREATE TABLE IF NOT EXISTS garden_table(garden_id INTEGER PRIMARY KEY AUTOINCREMENT, garden_name VARCHAR(20))',//Query
                 [],
                 (tx, results)=>{
-                    console.log("Table Created")//Success Message
+                    console.log("Garden Table Created")//Success Message
+                }
+            )
+        })
+
+        db.transaction(function(tx){
+            tx.executeSql(
+                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20))',//Query
+                [],
+                (tx, results)=>{
+                    console.log("Plant Table Created")//Success Message
                 }
             )
         })
