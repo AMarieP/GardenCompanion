@@ -18,7 +18,7 @@ const MyGardens = () => {
                 (tx, results) => {
                     var tempArr = [];
                     for (let i=0; i < results.rows.length; i++){
-                        temp.push(results.rows.item(i))
+                        tempArr.push(results.rows.item(i))
                     }
                     setGardenItem(tempArr)
                 }
