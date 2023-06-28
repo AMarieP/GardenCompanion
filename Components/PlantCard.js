@@ -11,10 +11,10 @@ const PlantCard = ({props}) => {
       <Text adjustsFontSizeToFit
             numberOfLines={2}
             maxFontSizeMultiplier={1}
-            style={styles.title}>{props.plantName}</Text>
+            style={styles.title}>{props.plant_name}</Text>
       <View style={styles.conatinerTwo}>
         <Image
-        source={props.plantImage} style={styles.image}/>
+        source={props.plant_image} style={styles.image}/>
         <View style={styles.effects}></View>
       </View>
     </View>
