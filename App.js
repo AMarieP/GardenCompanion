@@ -12,6 +12,7 @@ import testPlant from './testPlant';
 import Fieldset from './Components/Fieldset';
 import CameraDemo from './Components/Camera';
 import Landing from './Screens/Landing';
+import MyGardens from './Screens/MyGardens';
 
 //Form
 import NewPlantForm from './Components/NewPlantForm';
@@ -36,7 +37,6 @@ export default function App() {
   } else {
     return (
       <View style={styles.container}>
-        <Landing />
       </View>
     );
   }
