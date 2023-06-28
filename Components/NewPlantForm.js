@@ -2,6 +2,7 @@ import { StyleSheet, View, Image, TextInput, Dimensions, Pressable } from 'react
 import Text from './MyText';
 import H1 from './H1';
 import H2 from './H2'
+import Camera from './Camera';
 import Fieldset from './Fieldset';
 import { Picker } from '@react-native-picker/picker';
 import { React, useState } from 'react'
@@ -21,7 +22,7 @@ const NewPlantForm = () => {
         <View style={styles.container}>
           <H1>New Plant Type</H1>
           <View style={styles.imageContainer}>
-            <Image style={styles.image} source={capsicum}/>
+            <Camera />
           </View>
           <Fieldset title="name: ">
             <View>
@@ -130,11 +131,11 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       overflow: 'hidden'
     },
-    image: {
-      resizeMode: 'cover',
-      width: '100%',
-      height: '100%',
-    },
+    // image: {
+    //   resizeMode: 'cover',
+    //   width: '100%',
+    //   height: '100%',
+    // },
 
     
 })

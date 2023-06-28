@@ -5,7 +5,7 @@ import colours from '../colours'
 //Bug w launchCameraAsync on android 
 import { launchImageLibraryAsync } from 'expo-image-picker'
 
-const CameraDemo = () => {
+const Camera = () => {
 
     const [pickedImage, setImage] = useState()
     
@@ -24,6 +24,6 @@ const CameraDemo = () => {
   )
 }
 
-export default CameraDemo
+export default Camera
 
 const styles = StyleSheet.create({})

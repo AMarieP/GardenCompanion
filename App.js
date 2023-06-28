@@ -34,14 +34,14 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <CameraDemo />
-      // <View style={styles.container}>
-      // <Text style={{fontFamily: 'Ovo_400Regular'}} >Hello</Text>
-      // <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around'}}>
-      // <PlantCard props={testPlant}/>
-      // <PlantCard props={testPlant}/>
-      // </View>
-      // </View>
+      <View style={styles.container}>
+        {/* <Text style={{fontFamily: 'Ovo_400Regular'}} >Hello</Text>
+        <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around'}}>
+        <PlantCard props={testPlant}/>
+        <PlantCard props={testPlant}/>
+        </View> */}
+        <NewPlantForm />
+      </View>
     );
   }
 
@@ -53,5 +53,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: '100%'
   },
 });
