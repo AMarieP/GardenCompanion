@@ -1,6 +1,13 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
+//Components
+import GardenSelector from '../Components/GardenSelector';
+import OneGarden from '../Components/OneGarden';
+
+//Fake Data to Remove
+import { GARDENS, PLANTS } from '../assets/FakeData';
+
 //Database Connection
 import { DatabaseConnection } from '../Components/database/Database'
 const db = DatabaseConnection.getConnection();
@@ -37,11 +44,13 @@ const MyGardens = () => {
 
   return (
     <View>
-      <FlatList
+      {/* <FlatList
         data={gardenItem}
         renderItem={({item}) => renderGarden(item)}
         keyExtractor={(item)=>item.id}
-       />
+       /> */}
+       <GardenSelector props={GARDENS}/>
+       <OneGarden props={PLANTS}/>
     </View>
   )
 }

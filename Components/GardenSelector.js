@@ -4,50 +4,6 @@ import MyText from './MyText'
 import colours from '../colours';
 
 
-const GARDENS = [
-    {
-        garden_name:'GardenOne',
-        garden_id: 1,
-        garden_colour: colours.green,
-        garden_colour_light: colours.greenLight
-    },
-    {
-        garden_name: 'GardenTwo',
-        garden_id: 2,
-        garden_colour: colours.purple,
-        garden_colour_light: colours.purpleLight
-
-    },
-    {
-        garden_name: 'GardenThree',
-        garden_id: 3,
-        garden_colour: colours.mustard,
-        garden_colour_light: colours.mustardLight
-
-    },
-    {
-        garden_name: 'GardenFour',
-        garden_id: 4,
-        garden_colour: colours.red,
-        garden_colour_light: colours.redLight
-
-    },
-    {
-        garden_name: 'GardenFive',
-        garden_id: 5,
-        garden_colour: colours.navy,
-        garden_colour_light: colours.navyLight
-
-    },
-    {
-        garden_name: 'GardenSix',
-        garden_id: 6,
-        garden_colour: colours.red,
-        garden_colour_light: colours.redLight
-
-    }
-];
-
 const GardenSelector = ({props}) => {
 
     const [selectedGarden, setSelectedGarden] = useState([])
