@@ -32,6 +32,7 @@ const Landing = () => {
 
   return (
     <View>
+        <Text>Hello Welcome to Gardn Companion</Text>
     </View>
   )
 }

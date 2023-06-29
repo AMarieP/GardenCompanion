@@ -1,9 +1,22 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // Controls my font
 import AppLoading from 'expo-app-loading';
 import { useFonts, Ovo_400Regular } from '@expo-google-fonts/ovo';
+
+//Navigation
+const Drawer = createDrawerNavigator();
+
+//Screens
+import Landing from './Screens/Landing';
+import MyGardens from './Screens/MyGardens';
+import AllPlants from './Screens/AllPlants'
+
+
 
 //Imports
 
@@ -11,8 +24,6 @@ import PlantCard from './Components/PlantCard';
 import testPlant from './testPlant';
 import Fieldset from './Components/Fieldset';
 import CameraDemo from './Components/Camera';
-import Landing from './Screens/Landing';
-import MyGardens from './Screens/MyGardens';
 
 //buttonSVG
 import { CustomStatus } from './Components/SVGIcons/CustomStatus';
@@ -32,8 +43,13 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <View style={styles.container}>
-      </View>
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName='Landing'>
+          <Drawer.Screen name='Landing' component={Landing} />
+          <Drawer.Screen name='AllPlants' component={AllPlants} />
+          <Drawer.Screen name='MyGardens' component={MyGardens} />
+        </Drawer.Navigator>
+      </NavigationContainer>
     );
   }
 
