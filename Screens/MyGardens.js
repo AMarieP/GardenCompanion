@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {DefaultTheme, Provider} from 'react-native-paper';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import colours from '../colours';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -58,19 +61,38 @@ const MyGardens = () => {
         )
     }
 
+    const theme = {
+        ...DefaultTheme,
+        colors: {
+          ...DefaultTheme.colors,
+          secondaryContainer: 'transparent', // Use transparent to disable the little highlighting oval
+        },
+      };
+
   return (
-    <View style={{flex: 1}}>
+    <Provider theme={theme}>
+            <View style={{flex: 1}}>
       {/* <FlatList
         data={gardenItem}
         renderItem={({item}) => renderGarden(item)}
         keyExtractor={(item)=>item.id}
        /> */}
        <GardenSelector garden={GARDENS} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
-       <Tab.Navigator initialRouteName='Your Garden'>
-        <Tab.Screen name='Your Garden' component={OneGarden} initialParams={{props: PLANTS}} />
-        <Tab.Screen name='Edit Garden' component={EditGarden} />
+       <Tab.Navigator initialRouteName='Your Garden'
+                      activeColor='white'
+                      inactiveColor={colours.greenLight}
+                      barStyle={{ backgroundColor: colours.green }}
+                      >
+        <Tab.Screen name='Your Garden' component={OneGarden} initialParams={{props: PLANTS}} options={{tabBarIcon: ({focused, color}) => (
+                    <Ionicons name="flower-outline" size={25} color={focused ? 'white' : colours.greenLight}/>
+                    ),}} />
+        <Tab.Screen name='Edit Garden' component={EditGarden} 
+                    options={{tabBarIcon: ({focused, color}) => (
+                    <Ionicons name="pencil-outline" size={25} color={focused ? 'white' : colours.greenLight}/>
+                    ),}} />
        </Tab.Navigator>
     </View>
+    </Provider>
   )
 }
 
