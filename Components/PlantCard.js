@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 15,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: 3
     },
 
     conatinerTwo: {
