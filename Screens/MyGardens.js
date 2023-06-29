@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+const Tab = createMaterialBottomTabNavigator();
 
 //Components
 import GardenSelector from '../Components/GardenSelector';
 import OneGarden from '../Components/OneGarden';
+import EditGarden from '../Components/EditGarden';
 
 //Fake Data to Remove
 import { GARDENS, PLANTS } from '../assets/FakeData';
@@ -55,14 +59,17 @@ const MyGardens = () => {
     }
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       {/* <FlatList
         data={gardenItem}
         renderItem={({item}) => renderGarden(item)}
         keyExtractor={(item)=>item.id}
        /> */}
        <GardenSelector garden={GARDENS} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
-       <OneGarden props={PLANTS}/>
+       <Tab.Navigator initialRouteName='Your Garden'>
+        <Tab.Screen name='Your Garden' component={OneGarden} initialParams={{props: PLANTS}} />
+        <Tab.Screen name='Edit Garden' component={EditGarden} />
+       </Tab.Navigator>
     </View>
   )
 }
