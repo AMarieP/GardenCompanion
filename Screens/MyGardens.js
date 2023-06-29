@@ -12,12 +12,22 @@ import { GARDENS, PLANTS } from '../assets/FakeData';
 import { DatabaseConnection } from '../Components/database/Database'
 const db = DatabaseConnection.getConnection();
 
+//TODO:
+//Set up DB so I can connect withthe appropriate plants for the garden. May require a useEffect for update
 
 const MyGardens = () => {
 
     const [selectedGarden, setSelectedGarden] = useState([])
 
-    const [gardenItem, setGardenItem] = useState([])
+        //sets seletedGarden to first item if props is true
+    // useEffect(() => {
+    //     if(!props.length == false){
+    //         setSelectedGarden(props[0])
+    //         console.log(selectedGarden)
+    //     }
+    // },[])
+
+    const [gardens, setGardens] = useState([])
 
     useEffect(() => {
         db.transaction(function(tx){
@@ -29,7 +39,7 @@ const MyGardens = () => {
                     for (let i=0; i < results.rows.length; i++){
                         tempArr.push(results.rows.item(i))
                     }
-                    setGardenItem(tempArr)
+                    setGardens(tempArr)
                 }
             )
         })
