@@ -4,17 +4,8 @@ import MyText from './MyText'
 import colours from '../colours';
 
 
-const GardenSelector = ({props}) => {
-
-    const [selectedGarden, setSelectedGarden] = useState([])
+const GardenSelector = ({garden, selectedGarden, setSelectedGarden}) => {
     
-    //sets seletedGarden to first item if props is true
-    useEffect(() => {
-        if(!props.length == false){
-            setSelectedGarden(props[0])
-            console.log(selectedGarden)
-        }
-    },[])
 
     const GardenButton = ({props}) => {
         return(
@@ -38,7 +29,7 @@ const GardenSelector = ({props}) => {
   return (
     <View style={styles.container}>
       <FlatList
-      data={props}
+      data={garden}
       renderItem={({item}) => <GardenButton props={item}/>}
       keyExtractor={(item) => item.garden_id}
       ListEmptyComponent={NoGardens}

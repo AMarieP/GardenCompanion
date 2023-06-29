@@ -15,6 +15,8 @@ const db = DatabaseConnection.getConnection();
 
 const MyGardens = () => {
 
+    const [selectedGarden, setSelectedGarden] = useState([])
+
     const [gardenItem, setGardenItem] = useState([])
 
     useEffect(() => {
@@ -49,7 +51,7 @@ const MyGardens = () => {
         renderItem={({item}) => renderGarden(item)}
         keyExtractor={(item)=>item.id}
        /> */}
-       <GardenSelector props={GARDENS}/>
+       <GardenSelector garden={GARDENS} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
        <OneGarden props={PLANTS}/>
     </View>
   )
