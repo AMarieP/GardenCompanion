@@ -1,14 +1,16 @@
+//MUST be top import
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+
 
 // Controls my font
 import AppLoading from 'expo-app-loading';
 import { useFonts, Ovo_400Regular } from '@expo-google-fonts/ovo';
 
 //Navigation
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 const Drawer = createDrawerNavigator();
 
 //Screens
@@ -44,10 +46,13 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName='Landing'>
+        <Drawer.Navigator initialRouteName='Landing' 
+                          screenOptions={{ 
+                            headerTitleStyle: { fontFamily: 'Ovo_400Regular' },
+                            headerTitleAlign: 'center' }}>
           <Drawer.Screen name='Landing' component={Landing} />
-          <Drawer.Screen name='AllPlants' component={AllPlants} />
-          <Drawer.Screen name='MyGardens' component={MyGardens} />
+          <Drawer.Screen name='All Plants' component={AllPlants} />
+          <Drawer.Screen name='My Gardens' component={MyGardens} />
         </Drawer.Navigator>
       </NavigationContainer>
     );
