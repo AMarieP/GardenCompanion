@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View, FlatList, Button, Pressable } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, FlatList, Pressable } from 'react-native'
+import React from 'react'
 import MyText from './MyText'
-import colours from '../colours';
 
 
 const GardenSelector = ({garden, selectedGarden, setSelectedGarden}) => {
     
-
     const GardenButton = ({props}) => {
         return(
             <Pressable style={[styles.gardenButton, 
