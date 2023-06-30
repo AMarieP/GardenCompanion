@@ -45,7 +45,7 @@ const NewPlantForm = ({navigation}) => {
   }
   
   //Retrieves the garden names and IDs
-  const [gardens, setGardens] = useState(GARDENS)
+  const [gardens, setGardens] = useState([])
 
   useEffect(() => {
     db.transaction(function(tx){

@@ -21,7 +21,6 @@ const db = DatabaseConnection.getConnection();
 db.exec(
     [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
     false, 
-    () =>   console.log('Foreign keys turned on') 
   );
 //TODO:
 //Set up DB so I can connect withthe appropriate plants for the garden. May require a useEffect for update
@@ -30,6 +29,8 @@ const MyGardens = () => {
 
     const [selectedGarden, setSelectedGarden] = useState([])
     const [gardens, setGardens] = useState([])
+    const [plants, setPlants] = useState([])
+    const [thisPlants, setThisPlants] = useState([])
 
     useEffect(() => {
         db.transaction(function(tx){
@@ -47,14 +48,19 @@ const MyGardens = () => {
         })
 
     }, [])
-
-    //sets seletedGarden to first item if props is true
+    
+    //Sets the plants for the garden
     useEffect(() => {
-        if(!gardens.length == false){
-            setSelectedGarden(gardens[0])
-            console.log(selectedGarden.garden_name)
-        }
-    },[])
+      setThisPlants([])
+      var x = []
+      plants.map((item) => {if(item.garden_id == selectedGarden){
+        x.push(item)
+      }
+      setThisPlants(x)}
+      )
+    },[selectedGarden])
+
+
     
     const theme = {
         ...DefaultTheme,
@@ -78,7 +84,7 @@ const MyGardens = () => {
                       inactiveColor={colours.greenLight}
                       barStyle={{ backgroundColor: colours.green }}
                       >
-        <Tab.Screen name='Your Garden' component={OneGarden} initialParams={{props: PLANTS}} options={{tabBarIcon: ({focused, color}) => (
+        <Tab.Screen name='Your Garden' component={OneGarden} initialParams={{props: thisPlants}} options={{tabBarIcon: ({focused, color}) => (
                     <Ionicons name="flower-outline" size={25} color={focused ? 'white' : colours.greenLight}/>
                     ),}} />
         <Tab.Screen name='Edit Garden' component={EditGarden} 

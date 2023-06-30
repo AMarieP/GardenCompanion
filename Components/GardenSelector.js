@@ -9,8 +9,8 @@ const GardenSelector = ({garden, selectedGarden, setSelectedGarden}) => {
         return(
             <Pressable style={[styles.gardenButton, 
                             {backgroundColor: props.garden_colour, 
-                            borderColor: props.garden_id == selectedGarden.garden_id ? props.garden_colour_light : props.garden_colour }]} 
-                        onPress={() => {setSelectedGarden(props); console.log(props.garden_name)}}>
+                            borderColor: props.garden_id === selectedGarden.garden_id ? 'black' : 'white' }]} 
+                        onPress={() => {setSelectedGarden(props); console.log('changed')}}>
                 <MyText style={{color: 'oldlace'}}>
                 {props.garden_name}
                 </MyText>
