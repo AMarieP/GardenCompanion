@@ -2,12 +2,16 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, {useEffect, useState} from 'react'
 
 import * as Location from 'expo-location';
+import { WEATHER_API_KEY } from '@env';
 
 
 const Weather = () => {
 
+    //Getting My location
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -18,8 +22,10 @@ const Weather = () => {
             return;
           }
     
-          let location = await Location.getCurrentPositionAsync({});
-          setLocation(location);
+          let location = await Location.getLastKnownPositionAsync({});
+        setLatitude(location.coords.latitude)
+        setLongitude(location.coords.longitude);
+        setLocation(location.coords);
         })();
       }, []);
     
@@ -29,6 +35,18 @@ const Weather = () => {
       } else if (location) {
         text = JSON.stringify(location);
       }
+    
+    //API REQUEST WEATHER
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ab6954f409994773b92111136233006&q=${latitude},${longitude}&aqi=no`)
+          const data = await response.json()
+          console.log({ data })
+        }
+    
+        fetchData()
+      }, [])
 
     const noWeather = () =>{
         return(
@@ -53,7 +71,8 @@ const Weather = () => {
     }
   return (
     <View>
-        <Text>{text}</Text>
+        <Text>{[latitude]}</Text>
+        <Text>{[longitude]}</Text>
     </View>
   )
 }
