@@ -5,7 +5,9 @@ import H2 from '../Components/H2'
 import Camera from '../Components/Camera';
 import Fieldset from '../Components/Fieldset';
 import { Picker } from '@react-native-picker/picker';
-import { React, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
+
 
 import {GARDENS, PLANTS} from '../assets/FakeData'
 
@@ -47,22 +49,24 @@ const NewPlantForm = ({navigation}) => {
   //Retrieves the garden names and IDs
   const [gardens, setGardens] = useState([])
 
-  useEffect(() => {
-    db.transaction(function(tx){
-        tx.executeSql(
-            'SELECT garden_id, garden_name from garden_table',
-            [],
-            (tx, results) => {
-                var tempArr = [];
-                for (let i=0; i < results.rows.length; i++){
-                    tempArr.push(results.rows.item(i))
-                }
-                setGardens(tempArr)
-            }
-        )
-    })
-
-}, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      db.transaction(function(tx){
+          tx.executeSql(
+              'SELECT garden_id, garden_name from garden_table',
+              [],
+              (tx, results) => {
+                  var tempArr = [];
+                  for (let i=0; i < results.rows.length; i++){
+                      tempArr.push(results.rows.item(i))
+                  }
+                  setGardens(tempArr)
+              }
+          )
+      })
+  
+  }, [])
+  )
 
     return (
       <ScrollView>

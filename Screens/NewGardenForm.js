@@ -5,6 +5,7 @@ import Picker from '../Components/Picker';
 import Fieldset from '../Components/Fieldset';
 import colours from '../colours';
 import { React, useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 
 //Database
 import { DatabaseConnection } from '../Components/database/Database';

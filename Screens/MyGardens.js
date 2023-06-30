@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import {DefaultTheme, Provider} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -32,7 +33,8 @@ const MyGardens = () => {
     const [plants, setPlants] = useState([])
     const [thisPlants, setThisPlants] = useState([])
 
-    useEffect(() => {
+    useFocusEffect(
+      React.useCallback(() => {
         db.transaction(function(tx){
             tx.executeSql(
                 'SELECT * from garden_table',
@@ -48,6 +50,7 @@ const MyGardens = () => {
         })
 
     }, [])
+    )
     
     //Sets the plants for the garden
     useEffect(() => {
