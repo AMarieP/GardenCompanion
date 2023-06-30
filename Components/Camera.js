@@ -5,16 +5,20 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 //Bug w launchCameraAsync on android 
-import { launchImageLibraryAsync } from 'expo-image-picker'
+import { launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker'
 
 const Camera = () => {
 
     const [pickedImage, setImage] = useState('')
     
-    const handleCamera = async()=>{
+    const handleLibrary = async()=>{
         const image = await launchImageLibraryAsync()
-        setImage(image.uri)
+        setImage(image.assets[0].uri)
     }
+    const handleCamera = async()=>{
+      const image = await launchCameraAsync()
+      setImage(image.assets[0].uri)
+  }
 
   return (
     <View>
@@ -22,7 +26,7 @@ const Camera = () => {
         <Image source={{uri:pickedImage, height: '100%', width: '100%'}} />
       </View>
       <View style={styles.buttons}>
-          <Pressable onPress={handleCamera} style={styles.button}><Ionicons name="images" size={25} color={colours.greenLight}/></Pressable>
+          <Pressable onPress={handleLibrary} style={styles.button}><Ionicons name="images" size={25} color={colours.greenLight}/></Pressable>
           <Pressable onPress={handleCamera} style={styles.button}><Ionicons name="camera" size={25} color={colours.greenLight}/></Pressable>
         </View>
     </View>
