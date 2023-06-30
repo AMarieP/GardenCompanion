@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import colours from '../colours';
 import { useContext } from 'react';
 import { GardenContext } from '../Context/SelectedGardenContext'
+import { SelGardenContext } from '../Context/GardenIDContext';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -64,7 +65,7 @@ const MyGardens = () => {
           )
       })
 
-    }, [])
+    }, [selectedGarden])
     )
     
     //Updates plants shown
@@ -95,6 +96,7 @@ const MyGardens = () => {
 
   return (
     <GardenContext.Provider value={thisPlants}>
+    <SelGardenContext.Provider value={selectedGarden}>
     <Provider theme={theme}>
             <View style={{flex: 1}}>
       {/* <FlatList
@@ -118,7 +120,9 @@ const MyGardens = () => {
        </Tab.Navigator>
     </View>
     </Provider>
+    </SelGardenContext.Provider>
     </GardenContext.Provider>
+    
   )
 }
 

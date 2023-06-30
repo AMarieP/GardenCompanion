@@ -8,7 +8,7 @@ import { GardenContext } from '../Context/SelectedGardenContext'
 import React, { useState, useEffect } from 'react'
 
 //Garden details will be drilled from the garden selector
-const OneGarden = ( ) => {
+const OneGarden = () => {
   garden = useContext(GardenContext)
 
   console.log(garden)
