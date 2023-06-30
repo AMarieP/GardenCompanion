@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useEffect} from 'react'
+import Weather from '../Components/Weather';
 
 import { DatabaseConnection } from '../Components/database/Database'
 
@@ -48,7 +49,7 @@ const Landing = () => {
 
   return (
     <View>
-        <Text>Hello Welcome to Gardn Companion</Text>
+        <Weather />
     </View>
   )
 }
