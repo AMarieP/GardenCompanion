@@ -25,15 +25,6 @@ const db = DatabaseConnection.getConnection();
 const MyGardens = () => {
 
     const [selectedGarden, setSelectedGarden] = useState([])
-
-        //sets seletedGarden to first item if props is true
-    // useEffect(() => {
-    //     if(!props.length == false){
-    //         setSelectedGarden(props[0])
-    //         console.log(selectedGarden)
-    //     }
-    // },[])
-
     const [gardens, setGardens] = useState([])
 
     useEffect(() => {
@@ -53,14 +44,14 @@ const MyGardens = () => {
 
     }, [])
 
-    const renderGarden = (item)=> {
-        return(
-            <View>
-                <Text>Garden Name is: {item.name}</Text>
-            </View>
-        )
-    }
-
+    //sets seletedGarden to first item if props is true
+    useEffect(() => {
+        if(!gardens.length == false){
+            setSelectedGarden(gardens[0])
+            console.log(selectedGarden.garden_name)
+        }
+    },[])
+    
     const theme = {
         ...DefaultTheme,
         colors: {
@@ -77,7 +68,7 @@ const MyGardens = () => {
         renderItem={({item}) => renderGarden(item)}
         keyExtractor={(item)=>item.id}
        /> */}
-       <GardenSelector garden={GARDENS} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
+       <GardenSelector garden={gardens} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
        <Tab.Navigator initialRouteName='Your Garden'
                       activeColor='white'
                       inactiveColor={colours.greenLight}

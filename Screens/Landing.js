@@ -21,13 +21,24 @@ const Landing = () => {
 
         db.transaction(function(tx){
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20), plant_image BLOB, plant_water_schedule INTEGER, FOREIGN KEY(garden_id) REFERENCES garden_table(garden_id))',//Query
+                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20), plant_water_schedule INTEGER)',//Query
                 [],
                 (tx, results)=>{
                     console.log("Plant Table Created")//Success Message
                 }
             )
         })
+        
+        // db.transaction(function(tx){
+        //     tx.executeSql(
+        //         'DROP TABLE plant_table',//Query
+        //         [],
+        //         (tx, results)=>{
+        //             console.log("Plant Table Dropped")//Success Message
+        //         }
+        //     )
+        // })
+        
     }, [])
 
   return (

@@ -17,7 +17,8 @@ export default Fieldset
 const styles = StyleSheet.create({
     fieldSet:{
         marginVertical: 10,
-        paddingVertical: 30,
+        paddingTop: 50,
+        paddingBottom: 30,
         borderWidth: 1,
         alignItems: 'center',
         borderColor: '#000',
@@ -29,6 +30,6 @@ const styles = StyleSheet.create({
         top: -10,
         left: 10,
         backgroundColor: 'white',
-        fontSize: 36,
+        fontSize: 32,
     }
 })

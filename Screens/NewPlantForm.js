@@ -1,76 +1,89 @@
-import { StyleSheet, View, Image, TextInput, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, View, Image, TextInput, Dimensions, ScrollView, Button, Pressable } from 'react-native';
 import Text from '../Components/MyText';
 import H1 from '../Components/H1';
 import H2 from '../Components/H2'
 import Camera from '../Components/Camera';
 import Fieldset from '../Components/Fieldset';
 import { Picker } from '@react-native-picker/picker';
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
+
+import {GARDENS, PLANTS} from '../assets/FakeData'
 
 //Image is placeholder for now
 //Placeholder text will be from the plant selection for now
 
+//Database
+import { DatabaseConnection } from '../Components/database/Database';
+import MyText from '../Components/MyText';
+import colours from '../colours';
+const db = DatabaseConnection.getConnection()
 
-const NewPlantForm = () => {
+const NewPlantForm = ({navigation}) => {
+  
+  //Sets values to pass to DB
+  // const [image, setSelectedImage] = useState('');
+  const [name, setSelectedName] = useState('');
+  const [days, setSelectedDays] = useState(1);
+  const [garden, setSelectedGarden] = useState('');
+  
+  //Adds values to DB
+  const addPlanttoDB = () => {
+    db.transaction(function(tx){
+      tx.executeSql(
+        'INSERT INTO plant_table(plant_name, plant_water_schedule)VALUES(?,?)',
+        [name, days],
+        (tx, results) => {
+          console.log("Plant Added Sucessfully ")
+        }
+      )
+    })
+  }
+  
+  //Retrieves the garden names and IDs
+  const [gardens, setGardens] = useState(GARDENS)
 
-    const capsicum = require('../assets/Capsicum_StockProduce.png')
+//   useEffect(() => {
+//     db.transaction(function(tx){
+//         tx.executeSql(
+//             'SELECT garden_id, garden_name from garden_table',
+//             [],
+//             (tx, results) => {
+//                 var tempArr = [];
+//                 for (let i=0; i < results.rows.length; i++){
+//                     tempArr.push(results.rows.item(i))
+//                 }
+//                 setGardens(tempArr)
+//             }
+//         )
+//     })
 
-     //Picker
-     const [days, setSelectedDays] = useState();
+// }, [])
 
     return (
+      <ScrollView>
         <View style={styles.container}>
-          <H1>New Plant Type</H1>
-          <View style={styles.imageContainer}>
+          {/* <View style={styles.imageContainer}>
             <Camera />
-          </View>
+          </View> */}
           <Fieldset title="name: ">
             <View>
               <TextInput
+                style={styles.input}
+                maxLength={20}
                 placeholder='e.g. "beefsteak tomato" or "golden pothos"'
+                value={name}
+                onChangeText={name=>setSelectedName(name)}
               />
             </View>
           </Fieldset>
           <Fieldset title="status effect:">
               <View style={styles.pickerContainer}>
                   <H2>water: </H2>
-                  <Text>every </Text>
+                  <Text> every </Text>
                   <Picker
-                      style={styles.picker}
+                      style={{minHeight: 50, minWidth: 100}}
                       selectedValue={days}
-                      onValueChange={(itemValue, itemIndex) =>
-                          setSelectedDays(itemValue)
-                      }>
-                      <Picker.Item label="1" value="1" />
-                      <Picker.Item label="2" value="2" />
-                      <Picker.Item label="3" value="3" />
-                      <Picker.Item label="4" value="4" />
-                      <Picker.Item label="5" value="5" />
-                      <Picker.Item label="6" value="6" />
-                      <Picker.Item label="7" value="7" />
-                      <Picker.Item label="8" value="8" />
-                      <Picker.Item label="9" value="9" />
-                      <Picker.Item label="10" value="10" />
-                      <Picker.Item label="11" value="11" />
-                      <Picker.Item label="12" value="12" />
-                      <Picker.Item label="13" value="13" />
-                      <Picker.Item label="14" value="14" />
-                      <Picker.Item label="15" value="15" />
-                      <Picker.Item label="16" value="16" />
-                      <Picker.Item label="17" value="17" />
-                      <Picker.Item label="18" value="18" />
-                      <Picker.Item label="19" value="19" />
-                      <Picker.Item label="20" value="20" />
-                      </Picker>
-                  <Text> days.</Text>
-              </View>
-              <View style={styles.pickerContainer}>
-                  <H2>fertilize: </H2>
-                  <Text>every </Text>
-                  <Picker
-                      style={styles.picker}
-                      selectedValue={days}
-                      onValueChange={(itemValue, itemIndex) =>
+                      onValueChange={(itemValue) =>
                           setSelectedDays(itemValue)
                       }>
                       <Picker.Item label="1" value="1" />
@@ -97,7 +110,24 @@ const NewPlantForm = () => {
                   <Text> days.</Text>
               </View>
           </Fieldset>
+          <Fieldset title="where will this plant go:">
+              <View style={styles.pickerContainer}>
+                  <H2>garden: </H2>
+                  <Picker
+                      style={{minHeight: 50, minWidth: 200}}
+                      itemStyle={{fontFamily: 'Ovo_400Regular'}}
+                      selectedValue={garden}
+                      onValueChange={(itemValue) =>
+                        setSelectedGarden(itemValue)
+                      }>
+                        {gardens.map(item => <Picker.Item label={item.garden_name} value={item.garden_id}/>)}
+                      </Picker>
+              </View>
+          </Fieldset>
+          <Pressable style={styles.addPlant} onPress={addPlanttoDB}><H1 style={{color: 'oldlace'}}>ADD PLANT</H1></Pressable>
+          <Pressable style={styles.deletePlant}onPress={() => navigation.goBack()} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
         </View>
+        </ScrollView>
   )
 }
 
@@ -105,19 +135,16 @@ export default NewPlantForm
 
 const styles = StyleSheet.create({
     pickerContainer: {
-        width: Dimensions.get('window').width,
-        minHeight: 200,
-        height: 500,
+        width: '100%',
         flexDirection: 'row',
-        alignItems: 'baseline',
-        // backgroundColor:'pink',
+        alignItems: 'center',
+        justifyContent: 'center',
         marginVertical: 10
     },
     picker: {
-        width: 100,
-        height: 50,
-        backgroundColor: "blue",
-        borderWidth: 1
+        minWidth: 100,
+        minHeight: 50,
+
     },
     container: {
       width: '100%',
@@ -131,11 +158,31 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       overflow: 'hidden'
     },
-    // image: {
-    //   resizeMode: 'cover',
-    //   width: '100%',
-    //   height: '100%',
-    // },
+    input: {
+      padding: 10,
+      width: '100%',
+      fontSize: 18
+    },
+    addPlant:{
+      height: 60,
+      width: '100%',
+      marginVertical: 5,
+      borderColor: colours.green,
+      borderWidth: 1,
+      backgroundColor: colours.greenLight,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    deletePlant:{
+      height: 30,
+      width: '100%',
+      marginVertical: 5,
+      borderColor: colours.red,
+      borderWidth: 1,
+      backgroundColor: colours.redLight,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
 
     
 })
