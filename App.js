@@ -52,7 +52,7 @@ export default function App() {
                           screenOptions={{ 
                             headerTitleStyle: { fontFamily: 'Ovo_400Regular' },
                             headerTitleAlign: 'center' }}>
-          <Drawer.Screen name='Landing' component={Landing} />
+          <Drawer.Screen name='Garden Companion' component={Landing} />
           <Drawer.Screen name='All Plants' component={AllPlants} />
           <Drawer.Screen name='New Plant' component={NewPlantForm} />
           <Drawer.Screen name='New Garden' component={NewGardenForm} />
