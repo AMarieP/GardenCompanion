@@ -11,7 +11,7 @@ const Landing = () => {
     useEffect(() => {
         db.transaction(function(tx){
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS garden_table(garden_id INTEGER PRIMARY KEY AUTOINCREMENT, garden_name VARCHAR(20))',//Query
+                'CREATE TABLE IF NOT EXISTS garden_table(garden_id INTEGER PRIMARY KEY AUTOINCREMENT, garden_name VARCHAR(20), garden_colour VARCHAR(20))',//Query
                 [],
                 (tx, results)=>{
                     console.log("Garden Table Created")//Success Message
@@ -21,7 +21,7 @@ const Landing = () => {
 
         db.transaction(function(tx){
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20))',//Query
+                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20), plant_image BLOB, plant_water_schedule INTEGER, FOREIGN KEY(garden_id) REFERENCES garden_table(garden_id))',//Query
                 [],
                 (tx, results)=>{
                     console.log("Plant Table Created")//Success Message
