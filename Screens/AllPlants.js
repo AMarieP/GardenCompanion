@@ -6,7 +6,11 @@ import PlantCard from '../Components/PlantCard';
 //Database Connection
 import { DatabaseConnection } from '../Components/database/Database'
 const db = DatabaseConnection.getConnection();
-
+db.exec(
+    [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
+    false, 
+    () =>   console.log('Foreign keys turned on') 
+  );
 
 const AllPlants = () => {
 

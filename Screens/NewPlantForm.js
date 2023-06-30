@@ -17,6 +17,11 @@ import { DatabaseConnection } from '../Components/database/Database';
 import MyText from '../Components/MyText';
 import colours from '../colours';
 const db = DatabaseConnection.getConnection()
+db.exec(
+  [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
+  false, 
+  () =>   console.log('Foreign keys turned on') 
+);
 
 const NewPlantForm = ({navigation}) => {
   
@@ -30,8 +35,8 @@ const NewPlantForm = ({navigation}) => {
   const addPlanttoDB = () => {
     db.transaction(function(tx){
       tx.executeSql(
-        'INSERT INTO plant_table(plant_name, plant_water_schedule)VALUES(?,?)',
-        [name, days],
+        'INSERT INTO plant_table(plant_name, plant_water_schedule, garden_ref)VALUES(?,?,?)',
+        [name, days, garden],
         (tx, results) => {
           console.log("Plant Added Sucessfully ")
         }
@@ -42,22 +47,22 @@ const NewPlantForm = ({navigation}) => {
   //Retrieves the garden names and IDs
   const [gardens, setGardens] = useState(GARDENS)
 
-//   useEffect(() => {
-//     db.transaction(function(tx){
-//         tx.executeSql(
-//             'SELECT garden_id, garden_name from garden_table',
-//             [],
-//             (tx, results) => {
-//                 var tempArr = [];
-//                 for (let i=0; i < results.rows.length; i++){
-//                     tempArr.push(results.rows.item(i))
-//                 }
-//                 setGardens(tempArr)
-//             }
-//         )
-//     })
+  useEffect(() => {
+    db.transaction(function(tx){
+        tx.executeSql(
+            'SELECT garden_id, garden_name from garden_table',
+            [],
+            (tx, results) => {
+                var tempArr = [];
+                for (let i=0; i < results.rows.length; i++){
+                    tempArr.push(results.rows.item(i))
+                }
+                setGardens(tempArr)
+            }
+        )
+    })
 
-// }, [])
+}, [])
 
     return (
       <ScrollView>

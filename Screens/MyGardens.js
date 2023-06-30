@@ -18,7 +18,11 @@ import { GARDENS, PLANTS } from '../assets/FakeData';
 //Database Connection
 import { DatabaseConnection } from '../Components/database/Database'
 const db = DatabaseConnection.getConnection();
-
+db.exec(
+    [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
+    false, 
+    () =>   console.log('Foreign keys turned on') 
+  );
 //TODO:
 //Set up DB so I can connect withthe appropriate plants for the garden. May require a useEffect for update
 

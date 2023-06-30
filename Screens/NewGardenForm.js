@@ -1,25 +1,31 @@
-import { StyleSheet, View, TextInput, Dimensions, Button } from 'react-native';
-import Text from './MyText';
-import H1 from './H1';
-import H2 from './H2'
-import Fieldset from './Fieldset';
+import { StyleSheet, View, TextInput, Dimensions, Pressable, ScrollView } from 'react-native';
+import H1 from '../Components/H1';
+import MyText from '../Components/MyText';
+import Picker from '../Components/Picker';
+import Fieldset from '../Components/Fieldset';
+import colours from '../colours';
 import { React, useState } from 'react'
 
 //Database
-import { DatabaseConnection } from './database/Database';
+import { DatabaseConnection } from '../Components/database/Database';
 
 const db = DatabaseConnection.getConnection()
+db.exec(
+  [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
+  false, 
+  () =>   console.log('Foreign keys turned on') 
+);
 
-
-const NewGardenForm = () => {
+const NewGardenForm = ({navigation}) => {
   //Handles Input
   const [name, setName] = useState('')
+  const [colour, setColour] = useState('')
 
   const addGardenDB = () => {
     db.transaction(function(tx){
       tx.executeSql(
-        'INSERT INTO garden_table(garden_name)VALUES(?)',
-        [name],
+        'INSERT INTO garden_table(garden_name, garden_colour)VALUES(?, ?)',
+        [name, colour],
         (tx, results) => {
           console.log("Garden Added Sucessfully ")
         }
@@ -28,24 +34,28 @@ const NewGardenForm = () => {
   }
 
     return (
+      <ScrollView>
         <View style={styles.container}>
-          <H1>New Garden Sector</H1>
           <Fieldset title="name: ">
             <View>
               <TextInput
                 placeholder='e.g. "Front Yard Garden Bed" or "Bathroom Shelf"'
                 value={name}
+                maxLength={20}
                 onChangeText={name=>setName(name)}
               />
             </View>
           </Fieldset>
           <Fieldset title="Colour:">
               <View style={styles.pickerContainer}>
-                  {/* where colour pciker would be */}
+                  <Picker colour={colour} setSelectedColour={setColour} />
               </View>
           </Fieldset>
-          <Button title='Submit' onPress={addGardenDB} />
+          <Pressable style={styles.addGarden} onPress={addGardenDB}><H1 style={{color: 'oldlace'}}>CREATE GARDEN</H1></Pressable>
+          <Pressable style={styles.delete}onPress={() => navigation.goBack()} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
         </View>
+      </ScrollView>
+
   )
 }
 
@@ -53,17 +63,18 @@ export default NewGardenForm
 
 const styles = StyleSheet.create({
     pickerContainer: {
-        width: Dimensions.get('window').width,
-        minHeight: 200,
-        height: 500,
+        width: '100%',
+        height: 100,
         flexDirection: 'row',
-        alignItems: 'baseline',
-        // backgroundColor:'pink',
-        marginVertical: 10
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginHorizontal: 50
     },
     container: {
       width: '100%',
-      alignContent: 'center'
+      alignContent: 'center',
+      marginVertical: 30,
     },
     imageContainer: {
       width: Dimensions.get('window').width,
@@ -78,6 +89,26 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%',
     },
+    addGarden:{
+      height: 60,
+      width: '100%',
+      marginVertical: 5,
+      borderColor: colours.green,
+      borderWidth: 1,
+      backgroundColor: colours.greenLight,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    delete:{
+      height: 30,
+      width: '100%',
+      marginVertical: 5,
+      borderColor: colours.red,
+      borderWidth: 1,
+      backgroundColor: colours.redLight,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
 
     
 })

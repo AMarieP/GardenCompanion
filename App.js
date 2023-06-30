@@ -34,6 +34,7 @@ import { WaterEffect } from './Components/SVGIcons/WaterEffect';
 import { EditButton } from './Components/SVGIcons/EditButton';
 import { AddButton } from './Components/SVGIcons/AddButton';
 import NewPlantForm from './Screens/NewPlantForm';
+import NewGardenForm from './Screens/NewGardenForm';
 
 export default function App() {
   
@@ -54,6 +55,7 @@ export default function App() {
           <Drawer.Screen name='Landing' component={Landing} />
           <Drawer.Screen name='All Plants' component={AllPlants} />
           <Drawer.Screen name='New Plant' component={NewPlantForm} />
+          <Drawer.Screen name='New Garden' component={NewGardenForm} />
           <Drawer.Screen name='My Gardens' component={MyGardens} />
         </Drawer.Navigator>
       </NavigationContainer>

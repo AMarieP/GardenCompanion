@@ -4,6 +4,11 @@ import React, {useEffect} from 'react'
 import { DatabaseConnection } from '../Components/database/Database'
 
 const db = DatabaseConnection.getConnection();
+db.exec(
+    [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
+    false, 
+    () =>   console.log('Foreign keys turned on') 
+  );
 
 const Landing = () => {
 
@@ -21,7 +26,7 @@ const Landing = () => {
 
         db.transaction(function(tx){
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20), plant_water_schedule INTEGER)',//Query
+                'CREATE TABLE IF NOT EXISTS plant_table(plant_id INTEGER PRIMARY KEY AUTOINCREMENT, plant_name VARCHAR(20), plant_water_schedule INTEGER, garden_ref INTEGER REFERENCES garden_table(garden_id) )',//Query
                 [],
                 (tx, results)=>{
                     console.log("Plant Table Created")//Success Message
@@ -31,7 +36,7 @@ const Landing = () => {
         
         // db.transaction(function(tx){
         //     tx.executeSql(
-        //         'DROP TABLE plant_table',//Query
+        //         'DROP TABLE garden_table',//Query
         //         [],
         //         (tx, results)=>{
         //             console.log("Plant Table Dropped")//Success Message
