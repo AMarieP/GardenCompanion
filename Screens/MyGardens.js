@@ -5,6 +5,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import {DefaultTheme, Provider} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colours from '../colours';
+import { useContext } from 'react';
+import { GardenContext } from '../Context/SelectedGardenContext'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -48,24 +50,40 @@ const MyGardens = () => {
                 }
             )
         })
+        db.transaction(function(tx){
+          tx.executeSql(
+              'SELECT * from plant_table',
+              [],
+              (tx, results) => {
+                  var tempArr = [];
+                  for (let i=0; i < results.rows.length; i++){
+                      tempArr.push(results.rows.item(i))
+                  }
+                  setPlants(tempArr)
+              }
+          )
+      })
 
     }, [])
     )
     
-    //Sets the plants for the garden
-    useFocusEffect(
-      React.useCallback(() => {
-        setThisPlants([])
-        var x = []
-        plants.map((item) => {if(item.garden_id == selectedGarden){
-          x.push(item)
-        }
-        setThisPlants(x)}
+    //Updates plants shown
+    useEffect(() => {
+      console.log(selectedGarden)
+      db.transaction(function(tx){
+        tx.executeSql(
+            'SELECT * from plant_table WHERE garden_ref = (?)',
+            [selectedGarden.garden_id],
+            (tx, results) => {
+                var tempArr = [];
+                for (let i=0; i < results.rows.length; i++){
+                    tempArr.push(results.rows.item(i))
+                }
+                setThisPlants(tempArr)
+            }
         )
-      },[selectedGarden])
-    )
-
-
+    })
+    },[selectedGarden])
     
     const theme = {
         ...DefaultTheme,
@@ -76,6 +94,7 @@ const MyGardens = () => {
       };
 
   return (
+    <GardenContext.Provider value={thisPlants}>
     <Provider theme={theme}>
             <View style={{flex: 1}}>
       {/* <FlatList
@@ -89,7 +108,7 @@ const MyGardens = () => {
                       inactiveColor={colours.greenLight}
                       barStyle={{ backgroundColor: colours.green }}
                       >
-        <Tab.Screen name='Your Garden' component={OneGarden} initialParams={{props: thisPlants}} options={{tabBarIcon: ({focused, color}) => (
+        <Tab.Screen name='Your Garden' component={OneGarden} options={{tabBarIcon: ({focused, color}) => (
                     <Ionicons name="flower-outline" size={25} color={focused ? 'white' : colours.greenLight}/>
                     ),}} />
         <Tab.Screen name='Edit Garden' component={EditGarden} 
@@ -99,6 +118,7 @@ const MyGardens = () => {
        </Tab.Navigator>
     </View>
     </Provider>
+    </GardenContext.Provider>
   )
 }
 
