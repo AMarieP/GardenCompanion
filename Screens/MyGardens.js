@@ -53,15 +53,17 @@ const MyGardens = () => {
     )
     
     //Sets the plants for the garden
-    useEffect(() => {
-      setThisPlants([])
-      var x = []
-      plants.map((item) => {if(item.garden_id == selectedGarden){
-        x.push(item)
-      }
-      setThisPlants(x)}
-      )
-    },[selectedGarden])
+    useFocusEffect(
+      React.useCallback(() => {
+        setThisPlants([])
+        var x = []
+        plants.map((item) => {if(item.garden_id == selectedGarden){
+          x.push(item)
+        }
+        setThisPlants(x)}
+        )
+      },[selectedGarden])
+    )
 
 
     
