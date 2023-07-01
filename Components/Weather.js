@@ -12,14 +12,7 @@ const Weather = () => {
     const [errorMsg, setErrorMsg] = useState(null);
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    const [weather, setWeather] = useState([state]);
-    
-    state = {
-        isLoading: false,
-        temperature: 0,
-        weatherCondition: null,
-        error: null
-      };
+    const [temperature, setTemperature] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -50,9 +43,10 @@ const Weather = () => {
         const fetchData = async () => {
           const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ab6954f409994773b92111136233006&q=${latitude},${longitude}&aqi=no`)
           const data = await response.json()
-          console.log({ data })
+          console.log(data.current.feelslike_c)
+          setTemperature(data.current.feelslike_c)
+          console.log(temperature)
       }
-    
         fetchData()
       }, [])
 
@@ -68,7 +62,7 @@ const Weather = () => {
         return(
             <View>
                 <Text>the temperature is</Text>
-                <Text>{weather.current}</Text>
+                <Text>{temperature}</Text>
                 <Text>the forecast for today is</Text>
                 <Text>Sunny</Text>
                 <Text>The chance of rain today is: </Text>
@@ -79,7 +73,7 @@ const Weather = () => {
     }
   return (
     <View>
-        <Text>{state.temperature}</Text>
+        <Text>{temperature}</Text>
 
     </View>
   )
