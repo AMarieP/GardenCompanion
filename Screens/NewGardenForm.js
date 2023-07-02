@@ -29,6 +29,9 @@ const NewGardenForm = ({navigation}) => {
         [name, colour],
         (tx, results) => {
           console.log("Garden Added Sucessfully ")
+        },
+        (tx, results) => {
+          console.log("Error in Adding Garden.")
         }
       )
     })

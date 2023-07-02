@@ -81,6 +81,9 @@ const MyGardens = () => {
                     tempArr.push(results.rows.item(i))
                 }
                 setThisPlants(tempArr)
+            },
+            (tx, results) => {
+              console.log('Could not access plants')
             }
         )
     })
@@ -98,12 +101,7 @@ const MyGardens = () => {
     <GardenContext.Provider value={thisPlants}>
     <SelGardenContext.Provider value={selectedGarden}>
     <Provider theme={theme}>
-            <View style={{flex: 1}}>
-      {/* <FlatList
-        data={gardenItem}
-        renderItem={({item}) => renderGarden(item)}
-        keyExtractor={(item)=>item.id}
-       /> */}
+      <View style={{flex: 1}}>
        <GardenSelector garden={gardens} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
        <Tab.Navigator initialRouteName='Your Garden'
                       activeColor='white'

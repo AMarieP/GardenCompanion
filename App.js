@@ -1,5 +1,7 @@
 //MUST be top import
 import 'react-native-gesture-handler';
+
+import * as MediaLibrary from 'expo-media-library';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 

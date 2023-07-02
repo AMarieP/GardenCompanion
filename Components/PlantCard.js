@@ -14,7 +14,7 @@ const PlantCard = ({props}) => {
             style={styles.title}>{props.plant_name}</Text>
       <View style={styles.conatinerTwo}>
         <Image
-        source={props.plant_image} style={styles.image}/>
+        source={{uri: props.plant_image}} style={styles.image}/>
         <View style={styles.effects}></View>
       </View>
     </View>

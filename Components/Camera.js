@@ -3,31 +3,63 @@ import React, { useState } from 'react'
 import colours from '../colours'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import * as MediaLibrary from 'expo-media-library';
+
+
 
 //Bug w launchCameraAsync on android 
 import { launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker'
 
-const Camera = () => {
-
-    const [pickedImage, setImage] = useState('')
+const Camera = ({image, setSelectedImage}) => {
     
     const handleLibrary = async()=>{
-        const image = await launchImageLibraryAsync()
-        setImage(image.assets[0].uri)
+        const pickedImage = await launchImageLibraryAsync()
+        setSelectedImage(pickedImage.assets[0].uri)
     }
     const handleCamera = async()=>{
-      const image = await launchCameraAsync()
-      setImage(image.assets[0].uri)
+      const pickedImage = await launchCameraAsync()
+      setSelectedImage(pickedImage.assets[0].uri)
   }
+
+  //Saves image to a folder on phone
+  // const SaveToPhone = async (item) => {
+  //   const permission = await MediaLibrary.requestPermissionsAsync();
+  //   if (permission.granted) {
+  //     try {
+  //       const asset = await MediaLibrary.createAssetAsync(item);
+  //       MediaLibrary.createAlbumAsync('GardenCompanionImages', asset, true)
+  //         .then(() => {
+  //           console.log('Image Saved Sucessfully!');
+  //           setSelectedImage(asset.uri)
+  //         })
+  //         .catch(() => {
+  //           console.log('Error In Saving Image!');
+  //         });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     console.log('Need Storage permission to save file');
+  //   }
+  // };
+
+  // const GetUriSavedImage = async() => {
+
+  // }
 
   return (
     <View>
       <View style={{width: '100%', height: '100%', backgroundColor: colours.greenLight}}>
-        <Image source={{uri:pickedImage, height: '100%', width: '100%'}} />
+        <Image source={{uri:image, height: '100%', width: '100%'}} />
       </View>
       <View style={styles.buttons}>
           <Pressable onPress={handleLibrary} style={styles.button}><Ionicons name="images" size={25} color={colours.greenLight}/></Pressable>
           <Pressable onPress={handleCamera} style={styles.button}><Ionicons name="camera" size={25} color={colours.greenLight}/></Pressable>
+          <Button
+            style={styles.button}
+            title="Submit"
+            onPress={() => SaveToPhone(image)}
+            color="#19AC52"/>
         </View>
     </View>
   )

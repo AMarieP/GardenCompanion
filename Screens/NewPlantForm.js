@@ -28,27 +28,31 @@ db.exec(
 const NewPlantForm = ({navigation}) => {
   
   //Sets values to pass to DB
-  // const [image, setSelectedImage] = useState('');
+  const [image, setSelectedImage] = useState('');
   const [name, setSelectedName] = useState('');
   const [days, setSelectedDays] = useState(1);
   const [garden, setSelectedGarden] = useState('');
-  
+  //Retrieves the garden names and IDs
+  const [gardens, setGardens] = useState([])
+
   //Adds values to DB
   const addPlanttoDB = () => {
     db.transaction(function(tx){
       tx.executeSql(
-        'INSERT INTO plant_table(plant_name, plant_water_schedule, garden_ref)VALUES(?,?,?)',
-        [name, days, garden],
+        'INSERT INTO plant_table(plant_name, plant_water_schedule, garden_ref, plant_image)VALUES(?,?,?,?)',
+        [name, days, garden, image],
         (tx, results) => {
           console.log("Plant Added Sucessfully ")
+        },
+        (tx, results) => {
+          console.log("Plant Error")
+
         }
       )
     })
   }
   
-  //Retrieves the garden names and IDs
-  const [gardens, setGardens] = useState([])
-
+  //QUery to retrieve the garden names and ids
   useFocusEffect(
     React.useCallback(() => {
       db.transaction(function(tx){
@@ -71,9 +75,9 @@ const NewPlantForm = ({navigation}) => {
     return (
       <ScrollView>
         <View style={styles.container}>
-          {/* <View style={styles.imageContainer}>
-            <Camera />
-          </View> */}
+          <View style={styles.imageContainer}>
+            <Camera image={image} setSelectedImage={setSelectedImage} />
+          </View>
           <Fieldset title="name: ">
             <View>
               <TextInput
