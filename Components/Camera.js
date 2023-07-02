@@ -55,11 +55,10 @@ const Camera = ({image, setSelectedImage}) => {
       <View style={styles.buttons}>
           <Pressable onPress={handleLibrary} style={styles.button}><Ionicons name="images" size={25} color={colours.greenLight}/></Pressable>
           <Pressable onPress={handleCamera} style={styles.button}><Ionicons name="camera" size={25} color={colours.greenLight}/></Pressable>
-          <Button
+          {/* <Button
             style={styles.button}
             title="Submit"
-            onPress={() => SaveToPhone(image)}
-            color="#19AC52"/>
+            onPress={() => SaveToPhone(image)}/> */}
         </View>
     </View>
   )
