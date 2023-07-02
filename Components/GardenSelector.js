@@ -20,7 +20,7 @@ const GardenSelector = ({garden, selectedGarden, setSelectedGarden}) => {
 
     const NoGardens = () => {
         return(
-            <MyText>No gardens to show</MyText>
+            <MyText style={{textAlign: 'center'}}>No gardens to show</MyText>
         )
     }
 
@@ -32,7 +32,7 @@ const GardenSelector = ({garden, selectedGarden, setSelectedGarden}) => {
       keyExtractor={(item) => item.garden_id}
       ListEmptyComponent={NoGardens}
       horizontal
-      style={styles.flatList} />
+      showsHorizontalScrollIndicator={false} />
     </View>
   )
 }
@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         paddingVertical: 10,
-    },
-    flatList: {
+        justifyContent: 'center',
     },
     gardenButton: {
         paddingVertical: 7,

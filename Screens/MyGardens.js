@@ -5,7 +5,6 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import {DefaultTheme, Provider} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colours from '../colours';
-import { useContext } from 'react';
 import { GardenContext } from '../Context/SelectedGardenContext'
 import { SelGardenContext } from '../Context/GardenIDContext';
 
@@ -16,9 +15,6 @@ import GardenSelector from '../Components/GardenSelector';
 import OneGarden from '../Components/OneGarden';
 import EditGarden from '../Components/EditGarden';
 
-//Fake Data to Remove
-import { GARDENS, PLANTS } from '../assets/FakeData';
-
 //Database Connection
 import { DatabaseConnection } from '../Components/database/Database'
 const db = DatabaseConnection.getConnection();
@@ -26,8 +22,6 @@ db.exec(
     [{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], 
     false, 
   );
-//TODO:
-//Set up DB so I can connect withthe appropriate plants for the garden. May require a useEffect for update
 
 const MyGardens = () => {
 
@@ -101,7 +95,7 @@ const MyGardens = () => {
     <GardenContext.Provider value={thisPlants}>
     <SelGardenContext.Provider value={selectedGarden}>
     <Provider theme={theme}>
-      <View style={{flex: 1}}>
+      <View style={styles.main}>
        <GardenSelector garden={gardens} selectedGarden={selectedGarden} setSelectedGarden={setSelectedGarden}/>
        <Tab.Navigator initialRouteName='Your Garden'
                       activeColor='white'
@@ -126,4 +120,9 @@ const MyGardens = () => {
 
 export default MyGardens
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  main:{
+    backgroundColor: 'white',
+    flex: 1
+  },
+})

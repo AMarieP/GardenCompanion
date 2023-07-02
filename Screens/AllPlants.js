@@ -12,7 +12,7 @@ db.exec(
     () =>   console.log('Foreign keys turned on') 
   );
 
-const AllPlants = () => {
+const AllPlants = ({navigation}) => {
 
     const [plant, setPlant] = useState([])
 
@@ -27,6 +27,9 @@ const AllPlants = () => {
                         tempArr.push(results.rows.item(i))
                     }
                     setPlant(tempArr)
+                },
+                (tx, results) => {
+                    console.log("Error Could not Retrieve Plants")
                 }
             )
         })
@@ -36,15 +39,15 @@ const AllPlants = () => {
     //Will navigate button to add new plant page
     const noPlants = ()=> {
         return(
-            <View>
+            <View style={styles.main}>
                 <MyText>You have no plants in your collection yet!</MyText>
-                <Button title='Create A New Plant' />
+                <Button title='Create A New Plant' onPress={() => navigation.NewPlantForm()} />
             </View>
         )
     }
 
   return (
-    <View>
+    <View style={styles.main}>
       <FlatList
         data={plant}
         renderItem={({item}) => <PlantCard props={item}/>}
@@ -58,4 +61,14 @@ const AllPlants = () => {
 
 export default AllPlants
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    main:{
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 3,
+        backgroundColor:'white',
+        minHeight: '100%',
+        paddingBottom: 100
+      },
+})

@@ -45,7 +45,7 @@ const EditGarden = ({navigation, selectedGarden}) => {
   }
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.main}>
         <View style={styles.container}>
           <Fieldset title="name: ">
             <View>
@@ -73,6 +73,11 @@ const EditGarden = ({navigation, selectedGarden}) => {
 export default EditGarden
 
 const styles = StyleSheet.create({
+  main:{
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    paddingTop: 5
+  },
     pickerContainer: {
         width: '100%',
         height: 100,

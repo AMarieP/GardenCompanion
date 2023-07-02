@@ -37,9 +37,15 @@ const NewGardenForm = ({navigation}) => {
     })
   }
 
+  const Reset = () =>{
+    setName('')
+    setColour('')
+  }
+
     return (
-      <ScrollView>
+      <ScrollView style={styles.main}>
         <View style={styles.container}>
+        <H1 style={{textAlign: 'center', marginVertical: 3}}>Create a New Garden</H1>
           <Fieldset title="name: ">
             <View>
               <TextInput
@@ -50,13 +56,13 @@ const NewGardenForm = ({navigation}) => {
               />
             </View>
           </Fieldset>
-          <Fieldset title="Colour:">
+          <Fieldset title="colour:">
               <View style={styles.pickerContainer}>
                   <Picker colour={colour} setSelectedColour={setColour} />
               </View>
           </Fieldset>
           <Pressable style={styles.addGarden} onPress={addGardenDB}><H1 style={{color: 'oldlace'}}>CREATE GARDEN</H1></Pressable>
-          <Pressable style={styles.delete}onPress={() => navigation.goBack()} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
+          <Pressable style={styles.delete}onPress={Reset} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
         </View>
       </ScrollView>
 
@@ -66,6 +72,11 @@ const NewGardenForm = ({navigation}) => {
 export default NewGardenForm
 
 const styles = StyleSheet.create({
+  main:{
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    paddingTop: 5,
+  },
     pickerContainer: {
         width: '100%',
         height: 100,

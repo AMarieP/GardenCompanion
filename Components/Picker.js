@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { StyleSheet, View, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import colours from '../colours'
 
-const Picker = ({colour, setSelectedColour}) => {
+const Picker = ({setSelectedColour}) => {
 
     const [pressed, setPressed] = useState('green')
   return (

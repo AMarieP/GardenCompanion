@@ -25,13 +25,13 @@ export default PlantCard
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'pink',
         color: '#00000',
         borderWidth: 1,
         borderRadius: 15,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        margin: 3
+        margin: 3,
+        backgroundColor: 'white'
     },
 
     conatinerTwo: {

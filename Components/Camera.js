@@ -1,16 +1,16 @@
 import { StyleSheet, Image, View, Button, Pressable, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import colours from '../colours'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import * as MediaLibrary from 'expo-media-library';
 
 
-
 //Bug w launchCameraAsync on android 
 import { launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker'
 
 const Camera = ({image, setSelectedImage}) => {
+
     
     const handleLibrary = async()=>{
         const pickedImage = await launchImageLibraryAsync()
@@ -49,7 +49,7 @@ const Camera = ({image, setSelectedImage}) => {
 
   return (
     <View>
-      <View style={{width: '100%', height: '100%', backgroundColor: colours.greenLight}}>
+      <View style={{width: '100%', height: '100%', backgroundColor: colours.purpleLight}}>
         <Image source={{uri:image, height: '100%', width: '100%'}} />
       </View>
       <View style={styles.buttons}>
