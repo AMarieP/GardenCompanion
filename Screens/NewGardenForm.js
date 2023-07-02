@@ -61,8 +61,8 @@ const NewGardenForm = ({navigation}) => {
                   <Picker colour={colour} setSelectedColour={setColour} />
               </View>
           </Fieldset>
-          <Pressable style={styles.addGarden} onPress={addGardenDB}><H1 style={{color: 'oldlace'}}>CREATE GARDEN</H1></Pressable>
-          <Pressable style={styles.delete}onPress={Reset} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
+          <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.addGarden]} onPress={addGardenDB}><H1 style={{color: 'oldlace'}}>CREATE GARDEN</H1></Pressable>
+          <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.delete]}onPress={Reset} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
         </View>
       </ScrollView>
 

@@ -142,6 +142,7 @@ const NewPlantForm = () => {
                   <H2>garden: </H2>
                   <Picker
                       style={{minHeight: 50, minWidth: 200}}
+                      
                       itemStyle={{fontFamily: 'Ovo_400Regular'}}
                       selectedValue={garden}
                       onValueChange={(itemValue) =>
@@ -151,8 +152,8 @@ const NewPlantForm = () => {
                       </Picker>
               </View>
           </Fieldset>
-          <Pressable style={styles.addPlant} onPress={addPlanttoDB}><H1 style={{color: 'oldlace'}}>ADD PLANT</H1></Pressable>
-          <Pressable style={styles.deletePlant}onPress={Reset} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
+          <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.addPlant]} onPress={addPlanttoDB}><H1 style={{color: 'oldlace'}}>ADD PLANT</H1></Pressable>
+          <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.deletePlant]}onPress={Reset} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
           <View style={{height: 20, width: '100%'}} />
         </View>
       </ScrollView>
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       backgroundColor: colours.greenLight,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     deletePlant:{
       height: 30,

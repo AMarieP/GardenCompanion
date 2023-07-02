@@ -53,8 +53,8 @@ const Camera = ({image, setSelectedImage}) => {
         <Image source={{uri:image, height: '100%', width: '100%'}} />
       </View>
       <View style={styles.buttons}>
-          <Pressable onPress={handleLibrary} style={styles.button}><Ionicons name="images" size={25} color={colours.greenLight}/></Pressable>
-          <Pressable onPress={handleCamera} style={styles.button}><Ionicons name="camera" size={25} color={colours.greenLight}/></Pressable>
+          <Pressable onPress={handleLibrary} style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.button]}><Ionicons name="images" size={25} color={colours.greenLight}/></Pressable>
+          <Pressable onPress={handleCamera} style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.button]}><Ionicons name="camera" size={25} color={colours.greenLight}/></Pressable>
           {/* <Button
             style={styles.button}
             title="Submit"
