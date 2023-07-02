@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useEffect} from 'react'
 import Weather from '../Components/Weather';
+import Fieldset from '../Components/Fieldset'
 
 import { DatabaseConnection } from '../Components/database/Database'
 
@@ -34,6 +35,16 @@ const Landing = () => {
                 }
             )
         })
+
+        db.transaction(function(tx){
+            tx.executeSql(
+                'CREATE TABLE IF NOT EXISTS user_details(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20))',//Query
+                [],
+                (tx, results)=>{
+                    console.log("User Table Created")//Success Message
+                }
+            )
+        })
         
         // db.transaction(function(tx){
         //     tx.executeSql(
@@ -49,12 +60,22 @@ const Landing = () => {
     
 
   return (
-    <View>
+    <View style={styles.main}>
         <Weather />
+        <Fieldset title="Garden Overview:">
+            <Text>Hello</Text>
+        </Fieldset>
     </View>
   )
 }
 
 export default Landing
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    main:{
+        width: '100%',
+        minHeight: '100%',
+        backgroundColor: 'white',
+        flex: 1
+      },
+})

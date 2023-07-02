@@ -33,18 +33,12 @@ const Weather = () => {
         })();
       }, []);
     
-      let text = 'Waiting..';
-      if (errorMsg) {
-        text = errorMsg;
-      } else if (location) {
-        text = JSON.stringify(location);
-      }
     
     //API REQUEST WEATHER
     
     useEffect(() => {
         const fetchData = async () => {
-          const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${latitude},${longitude}&aqi=no`)
+          const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ab6954f409994773b92111136233006&q=${latitude},${longitude}&aqi=no`)
           const data = await response.json()
           setTemperature(data.current.temp_c)
           setForecast(data.current.condition.text)
