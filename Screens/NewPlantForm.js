@@ -51,6 +51,8 @@ const NewPlantForm = () => {
         },
         (tx, results) => {
           console.log("Plant Error")
+          console.log(results)
+          console.log(garden)
 
         }
       )
@@ -83,7 +85,6 @@ const NewPlantForm = () => {
     setSelectedImage(exampleImageUri),
     setSelectedName(''),
     setSelectedDays(1)
-    setSelectedGarden('')
   }
 
     return (

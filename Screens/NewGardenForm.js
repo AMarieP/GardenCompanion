@@ -32,6 +32,7 @@ const NewGardenForm = ({navigation}) => {
         },
         (tx, results) => {
           console.log("Error in Adding Garden.")
+          console.log(results)
         }
       )
     })

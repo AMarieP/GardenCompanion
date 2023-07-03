@@ -18,7 +18,7 @@ const OneGarden = ({navigation}) => {
       return(
           <View style={[styles.main]}>
               <MyText>You have no plants in your garden yet!</MyText>
-              <Button title='Add A Plant' onPress={() => navigation.NewPlant()} />
+              <Button title='Add A Plant' onPress={() => navigation.navigate('New Plant')} />
           </View>
       )
   }
@@ -27,7 +27,7 @@ const OneGarden = ({navigation}) => {
     <View style={[styles.main, {backgroundColor: selGarden.garden_colour}]}>
       <FlatList
         data={garden}
-        renderItem={({item}) => <PlantCard plant={item}/>}
+        renderItem={({item}) => <PlantCard plant={item} navigation={navigation}/>}
         keyExtractor={(item)=>item.plant_id}
         numColumns={2}
         ListEmptyComponent={noPlants}

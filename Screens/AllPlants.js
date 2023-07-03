@@ -44,7 +44,7 @@ const AllPlants = ({navigation}) => {
         return(
             <View style={styles.main}>
                 <MyText>You have no plants in your collection yet!</MyText>
-                <Button title='Create A New Plant' onPress={() => navigation.NewPlantForm()} />
+                <Button title='Create A New Plant' onPress={() => navigation.navigate('New Plant')} />
             </View>
         )
     }
@@ -53,7 +53,7 @@ const AllPlants = ({navigation}) => {
     <View style={styles.main}>
       <FlatList
         data={plant}
-        renderItem={({item}) => <PlantCard plant={item}/>}
+        renderItem={({item}) => <PlantCard plant={item} navigation={navigation}/>}
         keyExtractor={(item)=>item.plant_id}
         numColumns={2}
         ListEmptyComponent={noPlants}

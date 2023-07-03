@@ -14,6 +14,8 @@ import { useFonts, Ovo_400Regular } from '@expo-google-fonts/ovo';
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 //Screens
@@ -29,7 +31,7 @@ import PlantCard from './Components/PlantCard';
 import testPlant from './testPlant';
 import Fieldset from './Components/Fieldset';
 import CameraDemo from './Components/Camera';
-import PlantPage from './Components/PlantPage';
+import PlantPage from './Screens/PlantPage';
 
 //buttonSVG
 import { CustomStatus } from './Components/SVGIcons/CustomStatus';
@@ -48,13 +50,18 @@ export default function App() {
 
   const [plantContext, setPlantContext] = useState('')
   
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     Ovo_400Regular,
   });
 
+  useEffect(() => {
+    console.log("loading")
+    console.log(fontsLoaded)
+
+  },[fontsLoaded])
   
   if (!fontsLoaded) {
-    return <Text>Hi</Text>;
+    return <Text>Loading...</Text>;
   } else {
     return (
       <PlantContext.Provider value={[plantContext, setPlantContext]}>
@@ -68,7 +75,7 @@ export default function App() {
             <Drawer.Screen name='New Plant' component={NewPlantForm} />
             <Drawer.Screen name='New Garden' component={NewGardenForm} />
             <Drawer.Screen name='My Gardens' component={MyGardens} />
-            <Drawer.Screen name='Plant Page' component={PlantPage} />
+            <Drawer.Screen name='Plant Page' component={PlantPage} options={{ drawerItemStyle: { height: 0 }}} />
           </Drawer.Navigator>
         </NavigationContainer>
       </PlantContext.Provider>

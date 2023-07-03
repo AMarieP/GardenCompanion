@@ -22,6 +22,7 @@ const Landing = () => {
                 [],
                 (tx, results)=>{
                     console.log("Garden Table Created")//Success Message
+                    console.log(results.rows)
                 }
             )
         })
@@ -32,6 +33,7 @@ const Landing = () => {
                 [],
                 (tx, results)=>{
                     console.log("Plant Table Created")//Success Message
+                    console.log(results.rows)
                 }
             )
         })

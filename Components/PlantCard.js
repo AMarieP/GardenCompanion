@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native'
 import React, { useState, useContext } from 'react'
 import { PlantContext } from '../Context/PlantCard'
+import { NavigationContainer } from '@react-navigation/native';
 
 // change view to Pressable
 //for effect map them
-const PlantCard = ({plant}) => {
+const PlantCard = ({plant, navigation}) => {
   
   const [plantContext, setPlantContext] = useContext(PlantContext)
   return (
-    <Pressable onPress={() => {setPlantContext(plant)}} style={[styles.container,  
+    <Pressable onPress={() => {setPlantContext(plant), navigation.navigate('Plant Page')}} style={[styles.container,  
         {width: Dimensions.get('window').width * 0.45,
         height: Dimensions.get('window').height * 0.29,}]}>
       <Text adjustsFontSizeToFit
