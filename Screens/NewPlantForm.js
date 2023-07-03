@@ -70,11 +70,12 @@ const NewPlantForm = () => {
                       tempArr.push(results.rows.item(i))
                   }
                   setGardens(tempArr)
+                  console.log("focusEffect")
               }
           )
       })
   
-  }, [])
+  },[])
   )
 
   //Reset form

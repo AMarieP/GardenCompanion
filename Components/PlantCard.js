@@ -1,23 +1,26 @@
 import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native'
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import { PlantContext } from '../Context/PlantCard'
 
 // change view to Pressable
 //for effect map them
-const PlantCard = ({props}) => {
+const PlantCard = ({plant}) => {
+  
+  const [plantContext, setPlantContext] = useContext(PlantContext)
   return (
-    <View style={[styles.container,  
+    <Pressable onPress={() => {setPlantContext(plant)}} style={[styles.container,  
         {width: Dimensions.get('window').width * 0.45,
         height: Dimensions.get('window').height * 0.29,}]}>
       <Text adjustsFontSizeToFit
             numberOfLines={2}
             maxFontSizeMultiplier={1}
-            style={styles.title}>{props.plant_name}</Text>
+            style={styles.title}>{plant.plant_name}</Text>
       <View style={styles.conatinerTwo}>
         <Image
-        source={{uri: props.plant_image}} style={styles.image}/>
+        source={{uri: plant.plant_image}} style={styles.image}/>
         <View style={styles.effects}></View>
       </View>
-    </View>
+    </Pressable>
   )
 }
 

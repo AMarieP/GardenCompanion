@@ -13,8 +13,6 @@ const OneGarden = ({navigation}) => {
   garden = useContext(GardenContext)
   selGarden = useContext(SelGardenContext)
 
-  console.log(SelGardenContext)
-
     //Will navigate to add a plant page
     const noPlants = ()=> {
       return(
@@ -29,7 +27,7 @@ const OneGarden = ({navigation}) => {
     <View style={[styles.main, {backgroundColor: selGarden.garden_colour}]}>
       <FlatList
         data={garden}
-        renderItem={({item}) => <PlantCard props={item}/>}
+        renderItem={({item}) => <PlantCard plant={item}/>}
         keyExtractor={(item)=>item.plant_id}
         numColumns={2}
         ListEmptyComponent={noPlants}

@@ -2,6 +2,7 @@ import { StyleSheet, View, FlatList, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MyText from '../Components/MyText';
 import PlantCard from '../Components/PlantCard';
+import { useFocusEffect } from '@react-navigation/native';
 
 //Database Connection
 import { DatabaseConnection } from '../Components/database/Database'
@@ -16,25 +17,27 @@ const AllPlants = ({navigation}) => {
 
     const [plant, setPlant] = useState([])
 
-    useEffect(() => {
-        db.transaction(function(tx){
-            tx.executeSql(
-                'SELECT * from plant_table',
-                [],
-                (tx, results) => {
-                    var tempArr = [];
-                    for (let i=0; i < results.rows.length; i++){
-                        tempArr.push(results.rows.item(i))
+    useFocusEffect(
+        React.useCallback(() => {
+            db.transaction(function(tx){
+                tx.executeSql(
+                    'SELECT * from plant_table',
+                    [],
+                    (tx, results) => {
+                        var tempArr = [];
+                        for (let i=0; i < results.rows.length; i++){
+                            tempArr.push(results.rows.item(i))
+                        }
+                        setPlant(tempArr)
+                    },
+                    (tx, results) => {
+                        console.log("Error Could not Retrieve Plants")
                     }
-                    setPlant(tempArr)
-                },
-                (tx, results) => {
-                    console.log("Error Could not Retrieve Plants")
-                }
-            )
-        })
-
-    }, [])
+                )
+            })
+    
+        }, [])
+    )
 
     //Will navigate button to add new plant page
     const noPlants = ()=> {
@@ -50,7 +53,7 @@ const AllPlants = ({navigation}) => {
     <View style={styles.main}>
       <FlatList
         data={plant}
-        renderItem={({item}) => <PlantCard props={item}/>}
+        renderItem={({item}) => <PlantCard plant={item}/>}
         keyExtractor={(item)=>item.plant_id}
         numColumns={2}
         ListEmptyComponent={noPlants}

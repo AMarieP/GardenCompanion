@@ -26,7 +26,7 @@ const Weather = () => {
             return;
           }
     
-          let location = await Location.getLastKnownPositionAsync({});
+          let location = await Location.getCurrentPositionAsync({});
         setLatitude(location.coords.latitude)
         setLongitude(location.coords.longitude);
         setLocation(location.coords);

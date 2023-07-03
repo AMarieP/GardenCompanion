@@ -1,9 +1,11 @@
-import { StyleSheet, View, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Dimensions, Pressable } from 'react-native';
 import Text from './MyText';
 import H1 from './H1';
 import H2 from './H2'
 import Fieldset from './Fieldset';
-import { React, useState, useEffect } from 'react'
+import { React, useEffect, useContext } from 'react'
+import { PlantContext } from '../Context/PlantCard';
+import colours from '../colours';
 
 //Database Connection
 import { DatabaseConnection } from '../Components/database/Database'
@@ -14,10 +16,10 @@ db.exec(
     () =>   console.log('Foreign keys turned on') 
   );
 
-const PlantPage = ({this_plant_id}) => {
+const PlantPage = ({navigation}) => {
 
-  const [plant, setPlant] = useState([])
-  const thisPlant = plant.find(item => item.plant_id === this_plant_id);
+  const [plantContext, setPlantContext] = useContext(PlantContext)
+  console.log(plantContext.plant_image)
 
   useEffect(() => {
       db.transaction(function(tx){
@@ -37,27 +39,24 @@ const PlantPage = ({this_plant_id}) => {
   }, )
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.main}>
       <View style={styles.container}>
-        {/* <View style={styles.imageContainer}>
-          <Camera />
-        </View> */}
+        <View style={styles.imageContainer}>
+        <Image
+        source={{uri: plantContext.plant_image}} style={styles.image}/>
+        </View>
         <Fieldset title="name: ">
           <View>
-            <H1>{thisPlant.plant_name}</H1>
+            <H1>{plantContext.plant_name}</H1>
           </View>
         </Fieldset>
         <Fieldset title="status effect:">
             <View style={styles.pickerContainer}>
                 <H2>water: </H2>
-                <Text> every {plant.plant_water_schedule} days.</Text>
+                <Text> every {plantContext.plant_water_schedule} days.</Text>
             </View>
         </Fieldset>
-        <Fieldset title="this plant is located in this garden:">
-            <View style={styles.pickerContainer}>
-                <H2>{plant.h}</H2>
-            </View>
-        </Fieldset>
+        <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }, styles.back]}onPress={() => navigation.goBack()} ><MyText style={{color: 'oldlace'}}>delete</MyText></Pressable>
       </View>
       </ScrollView>
 )
@@ -66,6 +65,11 @@ const PlantPage = ({this_plant_id}) => {
 export default PlantPage
 
 const styles = StyleSheet.create({
+  main:{
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    paddingTop: 5
+  },
   pickerContainer: {
       width: '100%',
       flexDirection: 'row',
@@ -95,17 +99,7 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 18
   },
-  addPlant:{
-    height: 60,
-    width: '100%',
-    marginVertical: 5,
-    borderColor: colours.green,
-    borderWidth: 1,
-    backgroundColor: colours.greenLight,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  deletePlant:{
+  back:{
     height: 30,
     width: '100%',
     marginVertical: 5,
@@ -114,7 +108,12 @@ const styles = StyleSheet.create({
     backgroundColor: colours.redLight,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  image: {
+    resizeMode: 'cover',
+    width: '100%',
+    height: '100%',
+},
 
   
 })
